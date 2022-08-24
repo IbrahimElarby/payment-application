@@ -1,0 +1,62 @@
+# depslib dependency file v1.0
+1661339488 source:d:\udacity\card\card.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"Card.h"
+
+1661270141 d:\udacity\card\card.h
+	<stdio.h>
+	<stdlib.h>
+
+1661275231 source:d:\udacity\udacity\main.c
+	<stdio.h>
+	<stdlib.h>
+	"../App/App.h"
+
+1661340737 source:d:\udacity\app\app.c
+	"App.h"
+	"../helper function/helper.h"
+	"../Server/Server.h"
+	"../Terminal/Terminal.h"
+	"../Card/Card.h"
+	<stdio.h>
+	<stdlib.h>
+
+1661269800 d:\udacity\app\app.h
+	<stdio.h>
+	<stdlib.h>
+	"../helper function/helper.h"
+	"../Server/Server.h"
+
+1661276980 d:\udacity\helper function\helper.h
+	"../Server/Server.h"
+
+1661276324 d:\udacity\server\server.h
+	"../Terminal/Terminal.h"
+
+1661275713 d:\udacity\terminal\terminal.h
+	"../Card/Card.h"
+
+1661339990 source:d:\udacity\terminal\terminal.c
+	<stdio.h>
+	<string.h>
+	<ctype.h>
+	"Terminal.h"
+
+1661277006 source:d:\udacity\helper function\helper.c
+	<stdio.h>
+	<ctype.h>
+	<stdlib.h>
+	<string.h>
+	"helper.h"
+	"../Server/Server.h"
+
+1661277023 source:d:\udacity\server\server.c
+	<stdio.h>
+	<string.h>
+	<ctype.h>
+	"Server.h"
+	"../helper function/helper.h"
+
