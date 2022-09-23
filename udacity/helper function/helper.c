@@ -5,21 +5,16 @@
 #include"helper.h"
 #include"../Server/Server.h"
 
-void intialize_table()
+
+void copystrr (unsigned char * old , unsigned char* neww)
 {
-	for (int i = 0; i < 255; i++)
-	{
-		account_database[i].balance = 0;
-	}
+    for(int i = 0 ; old[i] != 0 ; i++)
+    {
+        neww[i] = old[i];
+    }
 }
-void intialize_table_transaction()
-{
-	for (int i = 0; i < 255; i++)
-	{
-		side_transaction_database[i].transactionSequenceNumber = 0;
-	}
-}
-int hashfunction(char* str, int size)
+
+int hashfunction(uint8_t* str, uint32_t size)
 {
 	int sum = 0;
 	for (int i = 0; str[i] != 0; i++)
@@ -34,44 +29,45 @@ void insert_hashtable(ST_accountsDB_t member)
 	for (int i = 0; i < 255; i++)
 	{
 		int newindex = (i + index) % 255;
-		if (account_database[newindex].state == NULL)
+		if (account_database[newindex].primaryAccountNumber[0] == 0)
 		{
 			account_database[newindex] = member;
 			return;
 		}
 	}
 }
-int lookup_table(char* pan)
+int lookup_table(uint8_t* pan)
 {
 	int index = hashfunction(pan, 255);
 	for (int i = 0; i < 255; i++)
 	{
 		int newindex = (i + index) % 255;
-		if (account_database[newindex].state != NULL && strcmp(account_database[newindex].primaryAccountNumber, pan) == 0)
+		if (account_database[newindex].primaryAccountNumber[0] != 0 && strcmp(account_database[newindex].primaryAccountNumber, pan) == 0)
 		{
 			return 0;
 		}
 	}
 	return 1;
 }
-ST_accountsDB_t* lookup_table1(char* pan)
+int lookup_table1(uint8_t* pan)
 {
 	int index = hashfunction(pan, 255);
 	for (int i = 0; i < 255; i++)
 	{
 		int newindex = (i + index) % 255;
-		if (account_database[newindex].state != NULL && strcmp(account_database[newindex].primaryAccountNumber, pan) == 0)
+		if (account_database[newindex].primaryAccountNumber[0] != NULL && strcmp(account_database[newindex].primaryAccountNumber, pan) == 0)
 		{
-			return &account_database[newindex];
+			return newindex;
 		}
 	}
 	return NULL;
 }
-ST_transaction_t* binarysearch(int transactionNumber, int a, int b)
+int binarysearch(uint32_t transactionNumber, uint32_t a, uint32_t b)
 {
-	if (a == b) return NULL;
-	if (side_transaction_database[(a + b) / 2].transactionSequenceNumber == transactionNumber) return &side_transaction_database[(a + b) / 2];
+	if (a == b) return -1;
+	if (side_transaction_database[(a + b) / 2].transactionSequenceNumber == transactionNumber) return (a + b) / 2;
 	else if (side_transaction_database[(a + b) / 2].transactionSequenceNumber > transactionNumber) return binarysearch(transactionNumber, (a + b) / 2, b);
 	else if (side_transaction_database[(a + b) / 2].transactionSequenceNumber < transactionNumber) return binarysearch(transactionNumber, a, (a + b) / 2);
 
 }
+
