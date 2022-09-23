@@ -23,12 +23,12 @@ EN_terminalError_t getTransactionDate(ST_terminalData_t* termData)
 	if (!(termData->transactionDate[3] > '0') || !(termData->transactionDate[3] <= '1'))return WRONG_DATE;
 	return TERMINAL_OK;
 }
-EN_terminalError_t isCardExpired(ST_cardData_t cardData, ST_terminalData_t termData)
+EN_terminalError_t isCardExpired(ST_cardData_t* cardData, ST_terminalData_t* termData)
 {
-	if (termData.transactionDate[8] > cardData.cardExpirationDate[3])return EXPIRED_CARD;
-	if (termData.transactionDate[9] > cardData.cardExpirationDate[4])return EXPIRED_CARD;
-	if (termData.transactionDate[3] > cardData.cardExpirationDate[0])return EXPIRED_CARD;
-	if (termData.transactionDate[4] > cardData.cardExpirationDate[1])return EXPIRED_CARD;
+	if (termData->transactionDate[8] > cardData->cardExpirationDate[3])return EXPIRED_CARD;
+	if (termData->transactionDate[9] > cardData->cardExpirationDate[4])return EXPIRED_CARD;
+	if (termData->transactionDate[3] > cardData->cardExpirationDate[0])return EXPIRED_CARD;
+	if (termData->transactionDate[4] > cardData->cardExpirationDate[1])return EXPIRED_CARD;
 	return TERMINAL_OK;
 }
 
@@ -51,3 +51,4 @@ EN_terminalError_t setMaxAmount(ST_terminalData_t* termData)
 	if (termData->maxTransAmount <= 0) return INVALID_MAX_AMOUNT;
 	return TERMINAL_OK;
 }
+
