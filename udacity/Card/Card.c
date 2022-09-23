@@ -51,3 +51,4 @@ EN_cardError_t getCardPAN(ST_cardData_t* cardData)
     }
 	return CARD_OK;
 }
+
