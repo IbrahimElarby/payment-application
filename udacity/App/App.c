@@ -33,8 +33,18 @@ void appStart(void)
 		printf("EXPIRED CARD\n");
 		return;
 	}
-	getTransactionAmount(&(mytransaction.terminalData));
-	setMaxAmount(&(mytransaction.terminalData));
+		if (getTransactionAmount(&(mytransaction.terminalData)) == INVALID_AMOUNT)
+    {
+        printf("INVALID AMOUNT\n");
+		return;
+    }
+    if(setMaxAmount(&(mytransaction.terminalData)) == INVALID_MAX_AMOUNT)
+    {
+         printf("INVALID MAX AMOUNT\n");
+		return;
+    }
+
+
 	if (isBelowMaxAmount(&(mytransaction.terminalData)) == EXCEED_MAX_AMOUNT)
 	{
 		printf("EXCEEDED MAX AMOUNT");
@@ -54,3 +64,4 @@ void appStart(void)
 	saveTransaction(&mytransaction);
 
 }
+
